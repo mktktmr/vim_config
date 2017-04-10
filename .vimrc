@@ -193,15 +193,20 @@ nnoremap / /\v
 " タブ移動
 nnoremap [t :tabprevious<CR>
 nnoremap ]t :tabnext<CR>
-
 " :ls + :buffer
-cnoremap bb ls<CR>:buf
+nnoremap :bb :ls<CR>:buf
 " 開いてるファイルのパスを表示 (Show Path)
-cnoremap sp echo expand("%:p")<CR>
-" 現在日時を入力 (yyyy/MM/dd)
-cnoremap date <ESC>a<C-r>=strftime("%Y/%m/%d")<CR><ESC>
-" 現在日時を入力 (yyyy/MM/dd hh:mm:ss)
-cnoremap datetime <ESC>a<C-r>=strftime("%Y/%m/%d %H:%M:%S")<CR><ESC>
+nnoremap :sp :echo expand("%:p")<CR>
+" ワードカウント
+nnoremap :count :%s/\i\+/&/gn
+
+" 現在の日付を挿入 (yyyy/MM/dd)
+inoremap <C-d> <C-r>=strftime("%Y/%m/%d")<CR>
+" 現在日時を挿入 (yyyy/MM/dd hh:mm:ss)
+inoremap <C-d><C-t> <C-r>=strftime("%Y/%m/%d %H:%M:%S")<CR>
+
+" 現在のアクティブなバッファのパスを展開する
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 "-------------------------------------------------------------------------------
 " Unite:
