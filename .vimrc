@@ -69,6 +69,10 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
   NeoBundle 'cocopon/iceberg.vim'
 
+  " syntax
+  NeoBundle 'slim-template/vim-slim'
+  NeoBundle 'kchmck/vim-coffee-script'
+
 call neobundle#end()
 
 " Required:
