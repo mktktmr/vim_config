@@ -69,6 +69,10 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
   NeoBundle 'cocopon/iceberg.vim'
 
+  " syntax
+  NeoBundle 'slim-template/vim-slim'
+  NeoBundle 'kchmck/vim-coffee-script'
+
 call neobundle#end()
 
 " Required:
@@ -172,12 +176,20 @@ augroup END
 """let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
 "-------------------------------------------------------------------------------
-" rubocop:
+" syntastic:
+
 " syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
 " active_filetypesに、保存時に syntastic を走らせるファイルタイプを指定する
-
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'slim', 'javascript', 'css', 'scss'] }
+" If syntastic supports several checkers for your filetype, cofigure like below.
+" let g:syntastic_<filetype>_checkers = ['<checker-name>']
 let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_slim_checkers = ['slim_lint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
+let g:syntastic_javascript_flow_exec = 'node_modules/.bin/flow'
+let g:syntastic_css_checkers  = ['stylelint']
+let g:syntastic_scss_checkers = ['stylelint']
 
 "-------------------------------------------------------------------------------
 " refe:
@@ -193,15 +205,20 @@ nnoremap / /\v
 " タブ移動
 nnoremap [t :tabprevious<CR>
 nnoremap ]t :tabnext<CR>
-
 " :ls + :buffer
-cnoremap bb ls<CR>:buf
+nnoremap :bb :ls<CR>:buf
 " 開いてるファイルのパスを表示 (Show Path)
-cnoremap sp echo expand("%:p")<CR>
-" 現在日時を入力 (yyyy/MM/dd)
-cnoremap date <ESC>a<C-r>=strftime("%Y/%m/%d")<CR><ESC>
-" 現在日時を入力 (yyyy/MM/dd hh:mm:ss)
-cnoremap datetime <ESC>a<C-r>=strftime("%Y/%m/%d %H:%M:%S")<CR><ESC>
+nnoremap :sp :echo expand("%:p")<CR>
+" ワードカウント
+nnoremap :count :%s/\i\+/&/gn
+
+" 現在の日付を挿入 (yyyy/MM/dd)
+inoremap <C-d> <C-r>=strftime("%Y/%m/%d")<CR>
+" 現在日時を挿入 (yyyy/MM/dd hh:mm:ss)
+inoremap <C-d><C-t> <C-r>=strftime("%Y/%m/%d %H:%M:%S")<CR>
+
+" 現在のアクティブなバッファのパスを展開する
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 "-------------------------------------------------------------------------------
 " Unite:
