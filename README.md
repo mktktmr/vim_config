@@ -12,6 +12,7 @@ git clone https://github.com/Shougo/neobundle.vim.git vim_config/.vim/bundle/neo
 
 If you need .gvimrc.
 
+
 ```bash
 ln -s vim_config/.gvimrc .gvimrc
 ```
