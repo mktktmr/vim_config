@@ -176,12 +176,20 @@ augroup END
 """let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
 "-------------------------------------------------------------------------------
-" rubocop:
+" syntastic:
+
 " syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
 " active_filetypesに、保存時に syntastic を走らせるファイルタイプを指定する
-
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'slim', 'javascript', 'css', 'scss'] }
+" If syntastic supports several checkers for your filetype, cofigure like below.
+" let g:syntastic_<filetype>_checkers = ['<checker-name>']
 let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_slim_checkers = ['slim_lint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
+let g:syntastic_javascript_flow_exec = 'node_modules/.bin/flow'
+let g:syntastic_css_checkers  = ['stylelint']
+let g:syntastic_scss_checkers = ['stylelint']
 
 "-------------------------------------------------------------------------------
 " refe:
