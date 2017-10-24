@@ -41,7 +41,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   """NeoBundle 'Shougo/neocomplete.vim'
 
   " 静的解析
-  NeoBundle 'scrooloose/syntastic'
+  NeoBundle 'w0rp/ale'
 
   " ドキュメント参照
   NeoBundle 'thinca/vim-ref'
@@ -176,23 +176,16 @@ augroup END
 """let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
 "-------------------------------------------------------------------------------
-" syntastic:
+" ale:
 
-" syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
-" active_filetypesに、保存時に syntastic を走らせるファイルタイプを指定する
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'slim', 'javascript', 'css', 'scss'] }
-" If syntastic supports several checkers for your filetype, cofigure like below.
-" let g:syntastic_<filetype>_checkers = ['<checker-name>']
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_slim_checkers = ['slim_lint']
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
-let g:syntastic_javascript_flow_exec = 'node_modules/.bin/flow'
-let g:syntastic_css_checkers  = ['stylelint']
-let g:syntastic_scss_checkers = ['stylelint']
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
 
 "-------------------------------------------------------------------------------
 " refe:
+
 let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe' "refeコマンドのパス
 
 "-------------------------------------------------------------------------------
